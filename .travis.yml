@@ -2,5 +2,5 @@ language: Go
 
 go:
   - tip
-  
-  script: http.go
+
+script: http.go
