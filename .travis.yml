@@ -1,7 +1,5 @@
 language: Go
 
-install: make get-deps
-
 go:
   - tip
   
