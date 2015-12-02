@@ -3,4 +3,4 @@ language: Go
 go:
   - tip
 
-script: go test http.go
+script: go test
