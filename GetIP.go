@@ -17,9 +17,10 @@ func main() {
     words := []string{"all", "ip", "trace", "epoch"}
     model.Train(words)
 
-    commands := []string{"all", "ip", "trace", "epoch"}
-    incorrectWords := make([]string, len(os.Args)-1)
-    matches := 0
+    //leng := len(os.Args)
+    //commands := []string{"all", "ip", "trace", "epoch"}
+    incorrectWords := make([]string, 0, len(os.Args)-1)
+    //index := 0
     argArray := make([]string, len(os.Args)-1)
     choice := "2"
 
@@ -27,32 +28,36 @@ func main() {
         argArray[i-1] = os.Args[i]
     }
     
-    for i, choice := range argArray {
-		for _, command := range commands {
-            if choice == command {
-                matches++
-            } else {
-                incorrectWords[i] = choice
-            }
+    for _, arg := range argArray {
+        switch arg {
+            default:
+                fmt.Println(arg, "is spelled incorrectly. Adding to array")
+                incorrectWords = append(incorrectWords, arg)
+                //index++
+            case
+                "all",
+                "ip",
+                "trace",
+                "epoch":
+                fmt.Println(arg, "is spelled correctly")
         }
-	}
+    }
+    fmt.Println(incorrectWords)
     
-    if matches := len(os.Args) {
-        incorrect := len(os.Args) - matches
-        fmt.Println("There are", incorrect, "incorrect words")
-        for _, word := range incorrectWords {
-            fmt.Println("\nThe word", word, "was incorrect. Autocorrect commencing...")
-            fmt.Println("Did you mean:", model.Suggestions(saword, false), "?")
-            fmt.Println("Press 1 for yes, anything else for no.")
-            if _, err := fmt.Scanln(&choice); err != nil {
-                log.Fatal(err)
-            }
-            if choice == "1" {
-                fmt.Println("Replacing word...")
-            } else {
-                fmt.Println("Exiting...")
-                os.Exit(1)
-            }
+    incorrect := len(incorrectWords)
+    fmt.Println("There are", incorrect, "incorrect words")
+    for _, word := range incorrectWords {
+        fmt.Println("\nThe word", word, "was incorrect. Autocorrect commencing...")
+        fmt.Println("Did you mean:", model.SpellCheck(word), "?")
+        fmt.Println("Press 1 for yes, anything else for no.")
+        if _, err := fmt.Scanln(&choice); err != nil {
+            log.Fatal(err)
+        }
+        if choice == "1" {
+            fmt.Println("Replacing word...")
+        } else {
+            fmt.Println("Exiting...")
+            os.Exit(1)
         }
     }
     
