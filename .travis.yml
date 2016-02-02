@@ -3,4 +3,4 @@ language: Go
 go:
   - tip
 
-script: go build http.go
+script: go build GetIP.go
