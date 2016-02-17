@@ -17,10 +17,7 @@ func main() {
     words := []string{"all", "ip", "trace", "epoch"}
     model.Train(words)
 
-    //leng := len(os.Args)
-    //commands := []string{"all", "ip", "trace", "epoch"}
     incorrectWords := make([]string, 0, len(os.Args)-1)
-    //index := 0
     argArray := make([]string, len(os.Args)-1)
     choice := "2"
 
